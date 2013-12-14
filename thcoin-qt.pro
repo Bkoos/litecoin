@@ -1,7 +1,7 @@
 TEMPLATE = app
-TARGET = litecoin-qt
-macx:TARGET = "Litecoin-Qt"
-VERSION = 0.8.6.1
+TARGET = thcoin-qt
+macx:TARGET = "THCoin-Qt"
+VERSION = 0.0.1
 INCLUDEPATH += src src/json src/qt
 QT += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
