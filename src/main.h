@@ -1370,6 +1370,8 @@ public:
         return thash;
     }
 
+    
+
     CBlockHeader GetBlockHeader() const
     {
         CBlockHeader block;
