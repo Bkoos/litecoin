@@ -2749,11 +2749,11 @@ bool InitBlockIndex() {
     // Only add the genesis block if not reindexing (in which case we reuse the one already on disk)
     if (!fReindex) {
         // Genesis Block:
-        // CBlock(hash=e3d2b574f3b061ccf44fdcadd718e0ba4aa2d8cb443a52bf8f9dc9fd45285bac, input=0100000000000000000000000000000000000000000000000000000000000000000000009fe52932142284e99546ab8b05d9b81e438b50f60326ba01d86e40bb417df5c8044bac52f0ff0f1ecd6f3a7c, PoW=42a81cc1070458f792fb6731eb2bedbf528dd6e1d81aede372be1a4820d80ff9, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=c8f57d41bb406ed801ba2603f6508b431eb8d9058bab4695e98422143229e59f, nTime=1387023108, nBits=1e0ffff0, nNonce=2084204493, vtx=1)
-        //   CTransaction(hash=c8f57d41bb406ed801ba2603f6508b431eb8d9058bab4695e98422143229e59f, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-    	   //		CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d010443536369656e746973747320666f756e64206f6e2031342f4465632f3230313320746861742063616e6e61626973206d6967687420637572652065766572797468696e67)
-    	   //		CTxOut(nValue=100.00000000, scriptPubKey=040184710fa689ad5023690c80f3a4)
-  	   //		vMerkleTree: c8f57d41bb406ed801ba2603f6508b431eb8d9058bab4695e98422143229e59f 
+        //CBlock(hash=7b37149b6cdb3cf8b5b54adbb2730e3bae05a5bd864672dc04a63ca997e52e71, input=010000000000000000000000000000000000000000000000000000000000000000000000a87ce4915b11dca96f0f9613b43f35fcce7029d978a53f024ae9e870833946a8004eaa52f0ff0f1e5a680000, PoW=0000087aa1b2974de8714a16480a2e288b4489634629c10ad89482f976e075c7, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=a846398370e8e94a023fa578d92970cefc353fb413960f6fa9dc115b91e47ca8, nTime=1386892800, nBits=1e0ffff0, nNonce=26714, vtx=1)
+        //2013-12-15 17:10:19   CTransaction(hash=a846398370e8e94a023fa578d92970cefc353fb413960f6fa9dc115b91e47ca8, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+        //    CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d010448536369656e746973747320666f756e64206f6e20446563656d626572203133203230313320746861742063616e6e61626973206d6967687420637572652065766572797468696e67)
+        //    CTxOut(nValue=100.00000000, scriptPubKey=04da1790a9aac800b693cc3bd9d402)
+        //  vMerkleTree: a846398370e8e94a023fa578d92970cefc353fb413960f6fa9dc115b91e47ca8
         // Genesis block
         const char* pszTimestamp = "Scientists found on December 13 2013 that cannabis might cure everything";
         CTransaction txNew;
@@ -4588,13 +4588,13 @@ void static THCoinMiner(CWallet *pwallet)
 {
     printf("THCoinMiner started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
-    RenameThread("thcoin-miner");
+    RenameThread("bitcoin-miner");
 
     // Each thread has its own key and counter
     CReserveKey reservekey(pwallet);
     unsigned int nExtraNonce = 0;
 
-    try { loop {
+    try { while(true) {
         while (vNodes.empty())
             MilliSleep(1000);
 
@@ -4632,13 +4632,13 @@ void static THCoinMiner(CWallet *pwallet)
         //
         int64 nStart = GetTime();
         uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
-        loop
+        while(true)
         {
             unsigned int nHashesDone = 0;
 
             uint256 thash;
             char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
-            loop
+            while(true)
             {
 #if defined(USE_SSE2)
                 // Detection would work, but in cases where we KNOW it always has SSE2,
