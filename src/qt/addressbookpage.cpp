@@ -35,9 +35,10 @@ AddressBookPage::AddressBookPage(Mode mode, Tabs tab, QWidget *parent) :
     ui->signMessage->setIcon(QIcon());
     ui->exportButton->setIcon(QIcon());
 #endif
-
 #ifndef USE_QRCODE
     ui->showQRCode->setVisible(false);
+#else
+    ui->showQRCode->setVisible(true);
 #endif
 
     switch(mode)

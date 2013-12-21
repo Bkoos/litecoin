@@ -8,6 +8,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
 CONFIG += thread
+CONFIG += qt
 
 # for boost 1.37, add -mt to the boost libraries
 # use: qmake BOOST_LIB_SUFFIX=-mt
@@ -28,6 +29,8 @@ OPENSSL_INCLUDE_PATH=C:/MinGW/deps/openssl-1.0.1e/include
 OPENSSL_LIB_PATH=C:/MinGW/deps/openssl-1.0.1e
 MINIUPNPC_INCLUDE_PATH=C:/MinGW/deps/
 MINIUPNPC_LIB_PATH=C:/MinGW/deps/miniupnpc
+QRCODE_INCLUDE_PATH=C:\MinGW\msys\1.0\mingw\include
+QRCODE_LIB_PATH=C:\MinGW\msys\1.0\mingw\lib
 
 OBJECTS_DIR = build
 MOC_DIR = build
@@ -329,7 +332,7 @@ SOURCES += src/qt/test/test_main.cpp \
 HEADERS += src/qt/test/uritests.h
 DEPENDPATH += src/qt/test
 QT += testlib
-TARGET = litecoin-qt_test
+TARGET = thcoin-qt_test
 DEFINES += BITCOIN_QT_TEST
   macx: CONFIG -= app_bundle
 }
